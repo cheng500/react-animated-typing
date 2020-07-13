@@ -1,6 +1,6 @@
 {
   "name": "react-typing-animated",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "React Animated Typing",
   "main": "./dist/index.js",
   "files": [
@@ -22,6 +22,7 @@
   ],
   "author": "Ngai Cheng Kuan",
   "license": "ISC",
+  "repository": "https://github.com/cheng500/react-typing-animated",
   "devDependencies": {
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
