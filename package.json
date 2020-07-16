@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "flow": "flow",
-    "start": "flow && webpack-dev-server --open --mode development --host 0.0.0.0 --config webpack.config.js",
+    "start": "flow && webpack --mode=production --config webpack.prod.js && webpack-dev-server --open --mode development --host 0.0.0.0 --config webpack.config.js",
     "prepublishOnly": "build",
     "build": "flow && webpack --mode=production --config webpack.prod.js"
   },
