@@ -8,8 +8,6 @@ import ReactDOM from 'react-dom'
 
 import AnimatedText from '../../dist'
 
-console.log(AnimatedText)
-
 const App = () => {
   const [disabled, setDisabled] = React.useState(true)
 
