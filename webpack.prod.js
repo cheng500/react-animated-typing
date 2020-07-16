@@ -3,7 +3,7 @@ const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
   target: 'web',
-  entry: path.join(__dirname, '/src/AnimatedText.js'),
+  entry: path.join(__dirname, './src/index.js'),
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'index.js',
