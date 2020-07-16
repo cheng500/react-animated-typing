@@ -1,6 +1,6 @@
 {
   "name": "react-typing-animated",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "React Animated Typing",
   "main": "./dist/index.js",
   "files": [
@@ -9,9 +9,9 @@
   "scripts": {
     "flow": "flow",
     "start": "flow && npm run build && webpack-dev-server --open --mode development --host 0.0.0.0 --config webpack.config.js",
-    "prepublishOnly": "flow && npm run build",
-    "build": "flow && webpack --mode=production --config webpack.prod.js",
-    "dev": "flow &&  webpack-dev-server --open --mode development --host 0.0.0.0 --config webpack.dev.js"
+    "prepublishOnly": "build",
+    "build": "webpack --mode production --config webpack.prod.js",
+    "dev": "flow && webpack-dev-server --open --mode development --host 0.0.0.0 --config webpack.dev.js"
   },
   "keywords": [
     "react",

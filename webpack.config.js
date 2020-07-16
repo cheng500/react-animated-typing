@@ -22,5 +22,10 @@ module.exports = {
       template: path.join(__dirname, 'demo/index.html'),
       filename: './index.html'
     })
-  ]
+  ],
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './',
+    hot: true
+  }
 }
