@@ -5,7 +5,7 @@
 
 import React from 'react'
 
-const TypingText = (props) => {
+const TypingText = (props: Object) => {
   const { alwaysRefresh, disabled, href, text, tag: Tag, delay, speed = 100, style, textStyle, type } = props
   const [isComplete, setIsComplete] = React.useState(false)
   const [value, setValue] = React.useState('')

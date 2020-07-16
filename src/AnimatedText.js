@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import ChangingText from './ChangingText'
 import TypingText from './TypingText'
 
-const AnimatedText = (props) => {
+const AnimatedText = (props: Object) => {
   const { type } = props
 
   return (

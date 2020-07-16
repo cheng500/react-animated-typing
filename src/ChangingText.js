@@ -7,7 +7,7 @@ import React from 'react'
 
 const availableCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!/\\%$€&()=?+.,;:_<>#[]'
 
-const ChangingText = (props) => {
+const ChangingText = (props: Object) => {
   const { alwaysRefresh, disabled, href, text, tag: Tag, delay, speed = 100, style, textStyle, type } = props
   const [isComplete, setIsComplete] = React.useState(false)
   const [value, setValue] = React.useState('')
@@ -24,7 +24,7 @@ const ChangingText = (props) => {
             if ( j <= i || text[j] == ' ' ) {
               val += text[j]
             } else {
-              val += availableCharacters[Math.floor(Math.random(0, 1) * availableCharacters.length)]
+              val += availableCharacters[Math.floor(Math.random() * availableCharacters.length)]
             }
           }
           i++
@@ -44,7 +44,7 @@ const ChangingText = (props) => {
         if ( text[j] == ' ' ) {
           val += text[j]
         } else {
-          val += availableCharacters[Math.floor(Math.random(0, 1) * availableCharacters.length)]
+          val += availableCharacters[Math.floor(Math.random() * availableCharacters.length)]
         }
       }
       setValue(val)
