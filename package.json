@@ -8,9 +8,9 @@
   ],
   "scripts": {
     "flow": "flow",
-    "start": "webpack-dev-server --open --mode development --host 0.0.0.0 --config webpack.config.js",
-    "prepublishOnly": "webpack --mode=production --config webpack.prod.js",
-    "build": "webpack --mode development --config webpack.prod.js"
+    "start": "flow && webpack-dev-server --open --mode development --host 0.0.0.0 --config webpack.config.js",
+    "prepublishOnly": "build",
+    "build": "flow && webpack --mode=production --config webpack.prod.js"
   },
   "keywords": [
     "react",
