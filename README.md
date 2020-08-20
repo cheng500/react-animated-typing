@@ -1,7 +1,7 @@
 # react-typing-animation
 Simple react component to animate any tag in text you want.
 
-**[DEMO](https://website-ee18e.firebaseapp.com/lab/react-typing-animated)**
+**[DEMO](https://nckdev.agency/lab/react-typing-animated)**
 
 Use `npm start` to preview
 
@@ -16,9 +16,8 @@ Use `npm start` to preview
 ### Props
 name|required|type|default|description
 ----|--------|----|-------|-----------
-tag|true|string||Tag that the text will be put in
 text|true|string||Text to be animated
-alwaysRefresh|false|boolean|false|If true: always reanimate when prop changes, otherwise reanimate on text change
+tag|false|string|div|Tag that the text will be put in
 delay|false|number|0|Delay of the animation start by ms
 disabled|false|boolean|false|Disable animation start until set to true
 href|false|string||href in case it is a link

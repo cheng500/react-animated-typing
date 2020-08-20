@@ -1,6 +1,6 @@
 {
   "name": "react-typing-animated",
-  "version": "1.0.11",
+  "version": "2.0.6",
   "description": "React Animated Typing",
   "main": "./dist/index.js",
   "files": [
@@ -8,8 +8,8 @@
   ],
   "scripts": {
     "flow": "flow",
-    "start": "flow && npm run build && webpack-dev-server --open --mode development --host 0.0.0.0 --config webpack.config.js",
-    "prepublishOnly": "build",
+    "start": "npm run build && npm run flow && webpack-dev-server --open --mode development --host 0.0.0.0 --config webpack.config.js",
+    "prepublishOnly": "npm run build",
     "build": "webpack --mode production --config webpack.prod.js",
     "dev": "flow && webpack-dev-server --open --mode development --host 0.0.0.0 --config webpack.dev.js"
   },
@@ -38,6 +38,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
@@ -46,6 +47,7 @@
   "peerDependencies": {
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1"
   }
 }

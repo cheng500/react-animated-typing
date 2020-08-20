@@ -4,64 +4,27 @@
 'use strict'
 
 import React from 'react'
+import styled, { css, keyframes } from 'styled-components'
+import { toUnicode } from './helper'
 
-const availableCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!/\\%$€&()=?+.,;:_<>#[]'
+const ChangingText = styled(({ delay, random, speed, tag: Tag, textStyle, ...props }) => {
+  return <Tag style={{...textStyle, position: 'absolute', top: 0, left: 0 }} {...props}/>
+})`&:before{
+  ${({ delay, disabled, speed = 100, random, text }) => {
+    if ( disabled || ! random ) return
 
-const ChangingText = (props: Object) => {
-  const { alwaysRefresh, disabled, href, text, tag: Tag, delay, speed = 100, style, textStyle, type } = props
-  const [isComplete, setIsComplete] = React.useState(false)
-  const [value, setValue] = React.useState('')
-
-  React.useEffect(() => {
-    let i = 0
-    let animation
-    let timeout
-    if ( ! disabled ) {
-      timeout = setTimeout(() => {
-        animation = setInterval(() => {
-          let val = ''
-          for ( let j = 0; j < text.length; j++ ) {
-            if ( j <= i || text[j] == ' ' ) {
-              val += text[j]
-            } else {
-              val += availableCharacters[Math.floor(Math.random() * availableCharacters.length)]
-            }
-          }
-          i++
-
-          if ( i >= text.length ) {
-            clearInterval(animation)
-            setValue(text)
-            setIsComplete(true)
-          } else {
-            setValue(val)
-          }
-        }, speed)
-      }, delay)
-    } else {
-      let val = ''
-      for ( let j = 0; j < text.length; j++ ) {
-        if ( text[j] == ' ' ) {
-          val += text[j]
-        } else {
-          val += availableCharacters[Math.floor(Math.random() * availableCharacters.length)]
-        }
-      }
-      setValue(val)
+    const duration = text.length * speed
+    let helper = `0% { content: "${random}" }`
+    for ( let i = 0; i < text.length; i++ ) {
+      helper += `${(i + 1)/text.length * 100}% { content: "${toUnicode(`${text.substr(0, i + 1)}${random.substr(i + 1, text.length - 1)}`)}" } `
     }
-
-    return () => {
-      animation && clearInterval(animation)
-      timeout && clearTimeout(timeout)
-    }
-  }, [alwaysRefresh && props, text, disabled])
-
-  return (
-    <div style={{ position: 'relative', ...style}}>
-      <Tag style={{ display: 'block', visibility: 'hidden', ...textStyle }}>{value.length > text.length ? value : text}</Tag>
-      <Tag href={href} style={{ position: 'absolute', top: 0, ...textStyle }}>{value}</Tag>
-    </div>
-  )
-}
+    const animation = keyframes`${helper}`
+    return css`animation: ${animation} ${duration}ms linear forwards`
+  }};
+  content: '${({random}) => toUnicode(random)}';
+  display: block;
+  -webkit-animation-delay: ${({delay}) => delay}ms;
+  animation-delay: ${({delay}) => delay}ms;
+}`
 
 export default ChangingText

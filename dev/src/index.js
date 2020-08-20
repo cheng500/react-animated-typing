@@ -15,13 +15,11 @@ const App = () => {
     <div>
       <AnimatedText
         text="Random Text Change"
-        tag="div"
         type="random"
         style={{ margin: 20 }}
       />
       <AnimatedText
         text="Typing Text Change"
-        tag="div"
         style={{ margin: 20 }}
       />
       <button style={{ margin: 20 }} onClick={() => setDisabled(! disabled)}>Click here to toggle below</button>

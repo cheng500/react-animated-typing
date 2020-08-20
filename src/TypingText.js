@@ -4,41 +4,24 @@
 'use strict'
 
 import React from 'react'
+import styled, { css, keyframes } from 'styled-components'
+import { toUnicode } from './helper'
 
-const TypingText = (props: Object) => {
-  const { alwaysRefresh, disabled, href, text, tag: Tag, delay, speed = 100, style, textStyle, type } = props
-  const [isComplete, setIsComplete] = React.useState(false)
-  const [value, setValue] = React.useState('')
-
-  React.useEffect(() => {
-    let i = 0
-    let animation
-    let timeout
-    if ( ! disabled ) {
-      timeout = setTimeout(() => {
-        animation = setInterval(() => {
-          setValue(text.substring(0, i++) + (i % 2 ? '' : '_'))
-          if ( i >= text.length ) {
-            clearInterval(animation)
-            setValue(text)
-            setIsComplete(true)
-          }
-        }, speed)
-      }, delay)
+const TypingText = styled(({ delay, disabled, speed, tag: Tag, textStyle, ...props }) => <Tag style={{...textStyle, position: 'absolute', top: 0, left: 0 }} {...props} />)`&:before{
+  ${({ disabled, speed = 100, text }) => {
+    if ( disabled ) return
+    const duration = text.length * speed
+    let helper = `0% { content: "${toUnicode('_')}" }`
+    for ( let i = 0; i < text.length; i++ ) {
+      helper += `${(i + 1)/text.length * 100}% { content: "${toUnicode(`${text.substr(0, i + 1)}${i != text.length - 1 ? i % 2 ? '' : '_' : ''}`)}" } `
     }
-
-    return () => {
-      animation && clearInterval(animation)
-      timeout && clearTimeout(timeout)
-    }
-  }, [alwaysRefresh && props, text, disabled])
-
-  return (
-    <div style={{ position: 'relative', ...style}}>
-      <Tag style={{ display: 'block', visibility: 'hidden', ...textStyle }}>{value.length > text.length ? value : text}</Tag>
-      <Tag href={href} style={{ position: 'absolute', top: 0, ...textStyle }}>{value}</Tag>
-    </div>
-  )
-}
+    const animation = keyframes`${helper}`
+    return css`animation: ${animation} ${duration}ms linear forwards`
+  }};
+  content: '';
+  display: block;
+  -webkit-animation-delay: ${({delay}) => delay}ms;
+  animation-delay: ${({delay}) => delay}ms;
+}`
 
 export default TypingText
