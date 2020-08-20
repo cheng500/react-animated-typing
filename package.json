@@ -1,6 +1,6 @@
 {
   "name": "react-animated-typing",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "React Animated Typing",
   "main": "./dist/index.js",
   "files": [
