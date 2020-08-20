@@ -1,7 +1,10 @@
 # react-animated-typing
 Simple react component to animate any tag in text you want.
 
-**[DEMO](https://nckdev.agency/lab/react-typing-animated)**
+**[DEMO](https://nckdev.agency/lab/react-animated-typing/en)**
+
+### Installation
+`npm install --save react-animated-typing`
 
 Use `npm start` to preview
 
