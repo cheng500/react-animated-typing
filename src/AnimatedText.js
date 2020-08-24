@@ -11,23 +11,33 @@ import TypingText from './TypingText'
 
 const availableCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!/\\%$<E2><82><AC>&()=?+.,;:_<>#[]'
 
-const AnimatedText = ({ tag: Tag = 'div', text, type, style, textStyle, ...props }: Object) => {
-  const [random, setRandom] = React.useState(null)
+const AnimatedText = ({ delay = 0, disabled, speed = 100, tag: Tag = 'div', text, type, style, textStyle, ...props }: Object) => {
+  const [isComplete, setIsComplete] = React.useState(false)
+
+  const random = React.useMemo(() => {
+    let res = ''
+    if ( type == 'random' ) {
+      for ( let i = 0; i < text.length; i++ ) {
+        res += availableCharacters[Math.floor(Math.random() * availableCharacters.length)]
+      }
+    }
+    return res
+  }, [text, type])
 
   React.useEffect(() => {
-    let res = ''
-    for ( let i = 0; i < text.length; i++ ) {
-      res += availableCharacters[Math.floor(Math.random() * availableCharacters.length)]
-    }
-    setRandom(res)
-  }, [text])
+    setIsComplete(false)
+    if ( disabled ) return
+    let timeout = setTimeout(() => setIsComplete(true), speed * (text.length - 1) + delay)
+
+    return () => clearTimeout(timeout)
+  }, [text, disabled])
 
   return (
     <div style={{ ...style, position: 'relative' }}>
-      <Tag style={{ ...textStyle, visibility: 'hidden' }}>{text}</Tag>
+      <Tag style={{ ...textStyle, visibility: isComplete ? 'visible': 'hidden' }}>{text}</Tag>
       { type == 'random'
-        ? <ChangingText random={random} tag={Tag} text={text} textStyle={textStyle} {...props} />
-        : <TypingText tag={Tag} text={text} textStyle={textStyle} {...props} />
+        ? <ChangingText delay={delay} disabled={disabled} random={random} speed={speed} tag={Tag} text={text} textStyle={textStyle} {...props} />
+        : <TypingText delay={delay} disabled={disabled} speed={speed} tag={Tag} text={text} textStyle={textStyle} {...props} />
       }
     </div>
   )
