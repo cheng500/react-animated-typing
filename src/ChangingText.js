@@ -7,7 +7,7 @@ import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { toUnicode } from './helper'
 
-const ChangingText = React.memo(styled(({ delay, disabled, random, speed, tag: Tag, text, textStyle, ...props }) => {
+const ChangingText = React.memo<Object>(styled(({ delay, disabled, random, speed, tag: Tag, text, textStyle, ...props }) => {
   return <Tag style={{...textStyle, position: 'absolute', top: 0, left: 0 }} {...props} />
 })`&:before{
   ${({ delay, disabled, speed, random, text }) => {
@@ -18,7 +18,7 @@ const ChangingText = React.memo(styled(({ delay, disabled, random, speed, tag: T
     for ( let i = 0; i < text.length; i++ ) {
       helper += `${(i + 1)/(text.length - 1) * 100}% { content: "${toUnicode(`${text.substr(0, i + 1)}${random.substr(i + 1, text.length - 1)}`)}" } `
     }
-    helper += `100% { content: "" }`
+    helper += `100% { content: "${text}"; }`
     const animation = keyframes`${helper}`
     return css`animation: ${animation} ${duration}ms linear forwards`
   }};

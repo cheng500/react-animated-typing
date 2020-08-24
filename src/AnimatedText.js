@@ -27,14 +27,14 @@ const AnimatedText = ({ delay = 0, disabled, speed = 100, tag: Tag = 'div', text
   React.useEffect(() => {
     setIsComplete(false)
     if ( disabled ) return
-    let timeout = setTimeout(() => setIsComplete(true), speed * (text.length - 1) + delay)
+    let timeout = setTimeout(() => setIsComplete(true), speed * text.length + delay)
 
     return () => clearTimeout(timeout)
   }, [text, disabled])
 
   return (
     <div style={{ ...style, position: 'relative' }}>
-      <Tag style={{ ...textStyle, visibility: isComplete ? 'visible': 'hidden' }}>{text}</Tag>
+      <Tag style={{ ...textStyle, visibility: isComplete ? 'visible': 'hidden', opacity: 0.1 }}>{text}</Tag>
       { type == 'random'
         ? <ChangingText delay={delay} disabled={disabled} random={random} speed={speed} tag={Tag} text={text} textStyle={textStyle} {...props} />
         : <TypingText delay={delay} disabled={disabled} speed={speed} tag={Tag} text={text} textStyle={textStyle} {...props} />
