@@ -1,10 +1,10 @@
-import React from 'react'
+import { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import AnimatedText from './AnimatedText'
 
 const App = () => {
-  const [disabled, setDisabled] = React.useState(true)
+  const [disabled, setDisabled] = useState(true)
 
   return (
     <div>
@@ -39,7 +39,7 @@ const App = () => {
 
 const rootElement = document.getElementById('root')
 createRoot(rootElement).render(
-  <React.StrictMode>
+  <StrictMode>
     <App />
-  </React.StrictMode>
+  </StrictMode>
 )

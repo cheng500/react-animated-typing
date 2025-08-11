@@ -1,8 +1,8 @@
-import React from 'react'
+import { memo } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { toUnicode } from './helper'
 
-const ChangingText = React.memo(styled(({ delay, disabled, random, speed, tag: Tag, text, textStyle, ...props }) => {
+const ChangingText = memo(styled(({ delay, disabled, random, speed, tag: Tag, text, textStyle, ...props }) => {
   return <Tag style={{...textStyle, position: 'absolute', top: 0, left: 0 }} {...props} />
 })`&:before{
   ${({ disabled, speed, random, text }) => {

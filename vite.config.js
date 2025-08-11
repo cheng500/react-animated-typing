@@ -3,10 +3,11 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  copyPublicDir: false,
+  plugins: [react({ jsxRuntime: 'automatic' })],
   build: {
     lib: {
-      entry: 'src/index.js',
+      entry: 'src/index.jsx',
       name: 'AnimatedText',
       fileName: (format) => `animated-text.${format}.js`,
     },
@@ -20,5 +21,5 @@ export default defineConfig({
         },
       },
     },
-  },
+  }
 })

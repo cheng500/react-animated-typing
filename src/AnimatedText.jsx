@@ -1,13 +1,13 @@
-import React from "react";
+import { useEffect, useMemo, useState } from "react";
 import ChangingText from "./ChangingText";
 import TypingText from "./TypingText";
 
 const availableCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!/\\%$<E2><82><AC>&()=?+.,;:_<>#[]"
 
 const AnimatedText = ({ delay = 0, disabled, speed = 100, tag: Tag = "div", text, type, style, textStyle, ...props }) => {
-  const [isComplete, setIsComplete] = React.useState(false)
+  const [isComplete, setIsComplete] = useState(false)
 
-  const random = React.useMemo(() => {
+  const random = useMemo(() => {
     let res = ""
     if ( type == "random" ) {
       for ( let i = 0; i < text.length; i++ ) {
@@ -17,7 +17,7 @@ const AnimatedText = ({ delay = 0, disabled, speed = 100, tag: Tag = "div", text
     return res
   }, [text, type])
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsComplete(false)
     if ( disabled ) return
     let timeout = setTimeout(() => setIsComplete(true), speed * text.length + delay)
