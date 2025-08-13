@@ -1,0 +1,6 @@
+.react-animated-typing-typing-text::before {
+  content: "";
+  display: block;
+  animation: var(--animation-name) var(--animation-duration) linear forwards;
+  animation-delay: var(--animation-delay);
+}

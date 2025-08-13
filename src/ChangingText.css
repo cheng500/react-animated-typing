@@ -1,0 +1,10 @@
+.react-animated-typing-changing-text::before {
+  content: var(--initial-content);
+  display: block;
+  animation: var(--animation-name) var(--animation-duration) linear forwards;
+  animation-delay: var(--animation-delay);
+}
+
+.react-animated-typing-changing-text.disabled::before {
+  animation: none;
+}
