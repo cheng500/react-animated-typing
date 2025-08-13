@@ -1,5 +1,5 @@
-import { CSSProperties, useEffect, useState } from "react";
-import "./ChangingText.css";
+import { useEffect, useState } from "react";
+import { toUnicode } from "./helper";
 
 type Props = {
   delay?: number;
@@ -21,49 +21,53 @@ export default function ChangingText({
   text,
   textStyle,
 }: Props) {
-  const [animationName, setAnimationName] = useState<string | null>(null);
+  const [className, setClassName] = useState<string>("");
 
   useEffect(() => {
-    if (disabled || !random) return;
+    const name = `changing-${Math.random().toString(36).substring(2, 10)}`;
+    const duration = text.length * speed;
 
-    let keyframes = `@keyframes reveal-${text.replace(/\s+/g, "-")}{`;
-    keyframes += `0% { content: "${random}"; }`;
-
-    for (let i = 0; i < text.length; i++) {
-      const percent = ((i + 1) / (text.length - 1)) * 100;
-      const partial = text.substring(0, i + 1) + random.substring(i + 1);
-      keyframes += `${percent}% { content: "${partial}"; }`;
+    // Build keyframes only if not disabled
+    let keyframes = "";
+    if (!disabled && text && random) {
+      keyframes += `@keyframes ${name} {`;
+      keyframes += `0% { content: "${toUnicode(random)}"; }`;
+      for (let i = 0; i < text.length; i++) {
+        const percent = ((i + 1) / text.length) * 100;
+        const visible = text.substring(0, i + 1);
+        const remainingRandom = random.substring(i + 1);
+        keyframes += `${percent}% { content: "${toUnicode(visible + remainingRandom)}"; } `;
+      }
+      keyframes += `100% { content: "${toUnicode(text)}"; } }`;
     }
 
-    keyframes += `100% { content: "${text}"; }`;
-    keyframes += `}`;
-
     const styleTag = document.createElement("style");
-    styleTag.innerHTML = keyframes;
+    styleTag.textContent = `
+      .${name}::before {
+        content: "${toUnicode(random)}"; /* always show initial random */
+        display: inline-block;
+        ${!disabled ? `animation: ${name} ${duration}ms linear forwards; animation-delay: ${delay}ms;` : ""}
+      }
+      ${keyframes}
+    `;
     document.head.appendChild(styleTag);
 
-    setAnimationName(`reveal-${text.replace(/\s+/g, "-")}`);
+    setClassName(name);
 
     return () => {
       if (styleTag.parentNode) styleTag.parentNode.removeChild(styleTag);
     };
-  }, [text, random, speed, disabled]);
+  }, [text, random, speed, delay, disabled]);
 
   return (
     <Tag
-      className={`react-animated-typing-changing-text${disabled ? " disabled" : ""}`}
-      style={
-        {
-          ...textStyle,
-          position: "absolute",
-          top: 0,
-          left: 0,
-          "--animation-name": animationName,
-          "--animation-duration": `${text.length * speed}ms`,
-          "--animation-delay": `${delay}ms`,
-          "--initial-content": `"${random}"`,
-        } as CSSProperties
-      }
+      className={className}
+      style={{
+        ...textStyle,
+        position: "absolute",
+        top: 0,
+        left: 0,
+      }}
     />
   );
 }
