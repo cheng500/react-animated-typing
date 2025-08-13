@@ -1,6 +1,6 @@
 {
   "name": "react-animated-typing",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "author": "NCK DEV",
   "type": "module",
   "main": "dist/animated-text.umd.js",

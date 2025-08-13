@@ -4,12 +4,16 @@ import dts from "vite-plugin-dts";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react({ jsxRuntime: "automatic" }), dts({ tsconfigPath: "./tsconfig.app.json" })],
+  plugins: [
+    react({ jsxRuntime: "automatic" }),
+    dts({ tsconfigPath: "./tsconfig.app.json", rollupTypes: true }),
+  ],
   build: {
     copyPublicDir: false,
     lib: {
       entry: "src/index.tsx",
       name: "AnimatedText",
+      formats: ["es"],
       fileName: (format) => `animated-text.${format}.js`,
     },
     rollupOptions: {
