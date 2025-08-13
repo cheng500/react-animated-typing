@@ -44,7 +44,7 @@ export default function ChangingText({
     const styleTag = document.createElement("style");
     styleTag.textContent = `
       .${name}::before {
-        content: "${toUnicode(random)}"; /* always show initial random */
+        content: "${toUnicode(random || "")}"; /* always show initial random */
         display: inline-block;
         ${!disabled ? `animation: ${name} ${duration}ms linear forwards; animation-delay: ${delay}ms;` : ""}
       }

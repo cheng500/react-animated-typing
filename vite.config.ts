@@ -4,7 +4,7 @@ import dts from "vite-plugin-dts";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react({ jsxRuntime: "automatic" }), dts()],
+  plugins: [react({ jsxRuntime: "automatic" }), dts({ tsconfigPath: "./tsconfig.app.json" })],
   build: {
     copyPublicDir: false,
     lib: {

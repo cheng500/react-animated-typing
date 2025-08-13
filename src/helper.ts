@@ -1,4 +1,4 @@
-export function toUnicode(str) {
+export function toUnicode(str: string) {
   if (!str) return "";
   let unicodeString = "";
   for (let i = 0; i < str.length; i++) {
